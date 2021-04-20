@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="./Resources/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+    <script src="./Resources/jquery-3.6.0.js"></script>
+    <script type="text/javascript">
+
+        function SubmitEmpdata() {
+            var url = "https://localhost:44333/api/employee/addemployee";
+            var reqdata = {
+                firstName: document.getElementById("fName").value,
+                lastName: document.getElementById("lName").value,
+                hireDate: document.getElementById("hDate").value,
+                employeeNumber: document.getElementById("empNum").value,
+                departmentId: document.getElementById("depId").value
+            }
+            var stringReqdata = JSON.stringify(reqdata);
+            jQuery.ajax({
+                async: false,
+                type: "POST",
+                url: url,
+                data: stringReqdata,
+                dataType: "json",
+                context: document.body,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data, textStatus, jQxhr) {
+                    alert("Employee Added Successfully!");
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="./Home.html">Home</a>
+                <a class="nav-item nav-link" href="./EmployeeList.html">Employee List</a>
+                <a class="nav-item nav-link active" href="./AddEmployee.html">Add Employee</a>
+                <a class="nav-item nav-link" href="./UpdateEmployee.html">Update Empoyee</a>
+                <a class="nav-item nav-link" href="./DeleteEmployee.html">Delete Employee</a>
+            </div>
+        </div>
+
+    </nav>
+    <!--{
+    "id": 6,
+    "firstName": 'Dharmendra',
+    "lastName": 'Chaurasia',
+    "hireDate": "0001-01-01T00:00:00",
+    "employeeNumber": 'EP006',
+    "departmentId": 4
+    }-->
+    <div class="alert alert-success" role="alert" style="margin-top: 20px; margin-bottom: 20px;">
+        <center><h4 class="alert-heading">Register Employee</h4></center>
+    </div>
+    <div style="width: 70%; margin-left: auto; margin-right: auto; padding: 20px 0px;">
+        <form>
+            <div class="form-group">
+                <input class="form-control" id="dbId" aria-describedby="ID" placeholder="ID" required>
+            </div>
+            <div class="form-group" style="margin-top: 10px">
+                <input class="form-control" id="fName" aria-describedby="firstName" placeholder="First Name" required>
+            </div>
+            <div class="form-group" style="margin-top: 10px">
+                <input class="form-control" id="lName" placeholder="Last Name" required>
+            </div>
+            <div class="form-group" style="margin-top: 10px">
+                <input class="form-control" id="hDate" placeholder="Hire Date: 0001-01-01T00:00:00" required>
+            </div>
+            <div class="form-group" style="margin-top: 10px">
+                <input class="form-control" id="empNum" placeholder="Employee Number" required>
+            </div>
+            <div class="form-group" style="margin-top: 10px">
+                <input class="form-control" id="depId" placeholder="Department Id" required>
+            </div>
+            <button onclick="SubmitEmpdata();" id="submitBtn" type="submit" value="Submit" class="btn btn-primary" style="margin-top: 10px">Add Employee</button>
+
+        </form>
+        
+        <div class="modal fade" tabindex="-1" id="successModal">
+            <div id="myModalContainer">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Success</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Employee Addedd Successfully!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+    <div id="divError" class="alert alert-danger collapse">
+        <a id="linkClose" class="close" href="#">&times;</a>
+        <div id="divErrorText"></div>
+    </div>-->
+        <!-- <button class="btn btn-primary form-control" style="width: 30%; display: block; margin: auto;">Register Employee</button> -->
+    </div>
+
+</body>
+</html>
